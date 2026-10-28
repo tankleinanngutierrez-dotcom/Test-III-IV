@@ -1,0 +1,1 @@
+Uploaded doctor photos are stored here during development.

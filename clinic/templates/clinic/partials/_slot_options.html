@@ -1,0 +1,1 @@
+<select name="time_slot" id="id_time_slot" class="field"><option value="">Choose a time</option>{% for value,label in slots %}<option value="{{ value }}" {% if value in booked %}disabled{% endif %}>{{ label }}{% if value in booked %} — Booked{% endif %}</option>{% endfor %}</select>

@@ -1,0 +1,13 @@
+{% load static %}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{% block title %}MediBook Clinic{% endblock %}</title>
+<link rel="stylesheet" href="{% static 'css/site.css' %}">
+<script src="https://unpkg.com/htmx.org@2.0.4" defer></script><script defer src="{% static 'js/app.js' %}"></script><script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+</head><body x-data>
+<header class="site-header" x-data="{menuOpen:false}"><a class="brand" href="{% url 'doctor_list' %}"><span class="brand-mark">✚</span><span>MediBook<small>CLINIC APPOINTMENTS</small></span></a>
+<button class="menu-toggle" @click="menuOpen=!menuOpen" :aria-expanded="menuOpen.toString()" aria-label="Toggle navigation">☰</button>
+<nav :class="menuOpen ? 'nav-links open' : 'nav-links'" @keydown.escape.window="menuOpen=false"><a href="{% url 'doctor_list' %}" @click="menuOpen=false">Find a doctor</a><a href="{% url 'manage_doctors' %}" @click="menuOpen=false">Manage doctors</a><a href="{% url 'manage_appointments' %}" @click="menuOpen=false">Appointments</a><button class="theme-button" @click="$store.theme.toggle()" aria-label="Toggle dark mode">◐ Theme</button></nav></header>
+<main class="container">
+{% if messages %}<div class="messages">{% for message in messages %}<p class="message {{ message.tags }}" role="status">{{ message }}</p>{% endfor %}</div>{% endif %}
+{% block content %}{% endblock %}</main><footer class="footer"><span>✚ MediBook</span><span>Care made easier · Demo clinic portal</span></footer>
+<div class="toast-stack" x-data x-for="toast in $store.toasts.items" :key="toast.id"><div class="toast" role="status" x-text="toast.message"></div></div>
+</body></html>
